@@ -112,13 +112,13 @@ header.appendChild(newElement);
 
 // Removing DOM elements
 // get the parent element of all parks
-const main = document.querySelector("main");
+const mainElem = document.querySelector("main");
 
 //select a single park
-const park = main.querySelector(".park-display");
+const park = mainElem.querySelector(".park-display");
 
 // remove that park
-// main.removeChild(park);
+// mainElem.removeChild(park);
 
 
 /* EVENT LISTENER */
@@ -198,9 +198,25 @@ const nameSorterClickHandler = (event) => {
 };
 
 
-// Select the `nameSorter` link
-const nameSorter = document.querySelector("#name-sorter");
-console.log(nameSorter);
+// The code that runs once the DOM is loaded
+const main = () => {
+  // Select the `nameSorter` link
+  const nameSorter = document.querySelector("#name-sorter");
+  console.log(nameSorter);
+  
+  // Add an event listener
+  nameSorter.addEventListener("click", nameSorterClickHandler);
+}
 
-// Add an event listener
-nameSorter.addEventListener("click", nameSorterClickHandler);
+// Add event listener for `DOMContentLoaded`
+window.addEventListener("DOMContentLoaded", main); // main  run after the HTML is fully parsed and loaded into the DOM.
+
+/* DOMContentLoaded
+*/
+console.log("Before!");
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  console.log("Loaded!");
+});
+
+console.log("After!");
