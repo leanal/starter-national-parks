@@ -76,8 +76,10 @@ for (let desc of descriptions.values()) {
   desc.innerHTML = content;
 }
 
+
 // select all rating values
 
+/*
 const ratings = document.querySelectorAll(".rating-display .value");
 
 for (let rating of ratings) {
@@ -91,6 +93,7 @@ for (let rating of ratings) {
     //rating.style.color = "#3ba17c";
   }
 }
+*/
 
 // create new Element with text 
 // Select all parks
@@ -197,6 +200,42 @@ const nameSorterClickHandler = (event) => {
   });
 };
 
+// function for sorting by rating
+const sortByRating = (parkA, parkB) => {
+  const parkARating = parseFloat(
+    parkA.querySelector(".rating-display > .value").innerText
+  );
+  const parkBRating = parseFloat(
+    parkB.querySelector(".rating-display > .value").innerText
+  );
+  return parkBRating - parkARating;
+};
+
+// function to handle the ratingSorter click
+const ratingSorterClickHandler = (event) => {
+  event.preventDefault();
+
+  // 1.  get the main element
+  const main = document.querySelector("main");
+
+  // 2. get the list of parks
+  const parksList = main.querySelectorAll(".park-display");
+
+  // 3. empty the main
+  main.innerHTML = "";
+
+  // 4. create an array
+  const parksArray = Array.from(parksList);
+
+  // 5. sort the array
+  parksArray.sort(sortByRating);
+
+  // 6. Insert each park into the DOM
+  parksArray.forEach((park) => {
+    main.appendChild(park);
+  });
+};
+
 
 // The code that runs once the DOM is loaded
 const main = () => {
@@ -206,12 +245,19 @@ const main = () => {
   
   // Add an event listener
   nameSorter.addEventListener("click", nameSorterClickHandler);
+  
+  // select the ratingSorter link
+  const ratingSorter = document.querySelector("#rating-sorter");
+
+  // add an event listener
+  ratingSorter.addEventListener("click", ratingSorterClickHandler);
 }
 
 // Add event listener for `DOMContentLoaded`
 window.addEventListener("DOMContentLoaded", main); // main  run after the HTML is fully parsed and loaded into the DOM.
 
 /* DOMContentLoaded
+ "Loaded!" is logged after the HTML is fully parsed and loaded into the DOM.
 */
 console.log("Before!");
 
