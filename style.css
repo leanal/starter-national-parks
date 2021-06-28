@@ -105,7 +105,7 @@ main {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* css updates from index.js */
+/* css updates for index.js */
 
 .high-rating {
   color: #3ba17c;
@@ -118,6 +118,12 @@ main {
 .header-statement {
   color: #ffffff;
   font-size: 1.2rem;
+}
+
+.sorter {
+  width: 90%;
+  margin: 0 auto;
+  padding: 6px;
 }
 
 @media screen and (min-width: 600px) {

@@ -134,3 +134,73 @@ allBtns.forEach((btn) => {
     park.style.backgroundColor = "#c8e6c9";
   });
 });
+
+
+// Function for sorting by name
+const sortByName = (parkA, parkB) => {
+  const parkAName = parkA.querySelector("h2").innerText;
+  const parkBName = parkB.querySelector("h2").innerText;
+  if (parkAName < parkBName) {
+    return -1;
+  } else if (parkAName > parkBName) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+// Add an event listener
+/*
+nameSorter.addEventListener("click", (event) => {
+  event.preventDefault(); 
+*/
+
+// Function for handling the `nameSorter` click
+const nameSorterClickHandler = (event) => {
+  event.preventDefault(); // gets rid of the default behavior of the link, which is reloading the page
+  console.log("You clicked the name sorter");
+
+  // 1.  Get the main element
+  const main = document.querySelector("main");
+  console.log(main);
+
+  // 2. Get the list of parks
+  const parksList = main.querySelectorAll(".park-display");
+  console.log(parksList);
+
+  // 3. Empty the main element
+  main.innerHTML = "";
+
+  // 4. Create an array from NodeList
+  const parksArray = Array.from(parksList);
+  console.log(parksArray);
+
+  // 5. Sort the array
+  parksArray.sort(sortByName);
+  /*
+  parksArray.sort((parkA, parkB) => {
+    const parkAName = parkA.querySelector("h2").innerText;
+    const parkBName = parkB.querySelector("h2").innerText;
+    if (parkAName < parkBName) {
+      return -1;
+    } else if (parkAName > parkBName) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  */
+
+  // 6. Insert each park into the DOM
+  parksArray.forEach((park) => {
+    main.appendChild(park);
+  });
+};
+
+
+// Select the `nameSorter` link
+const nameSorter = document.querySelector("#name-sorter");
+console.log(nameSorter);
+
+// Add an event listener
+nameSorter.addEventListener("click", nameSorterClickHandler);
